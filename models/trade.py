@@ -1,8 +1,9 @@
-from sqlalchemy import Column, String, Integer, Date, Enum
-from base import Base
+import enum
+from sqlalchemy import Column, String, Integer, DateTime, Enum, Numeric
+from models.base import Base
 class TradeType(enum.Enum):
-    buy = 1,
-    sell = 2
+    buy = 'buy'
+    sell = 'sell'
 
 class Trade(Base):
     __tablename__ = 'trades'
@@ -10,5 +11,13 @@ class Trade(Base):
     id = Column(Integer, primary_key=True)
     symbol = Column(String)
     price = Column(Numeric(precision=8, scale=2))
+    quantity = Column(Integer)
     tradetype = Column(Enum(TradeType))
-    tradetime = Column(Date)
+    tradetime = Column(DateTime)
+
+    def __init__(self, symbol, price, quantity, tradetype, tradetime):
+        self.symbol = symbol
+        self.price = price
+        self.quantity = quantity
+        self.tradetype = tradetype
+        self.tradetime = tradetime
