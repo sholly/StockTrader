@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from datetime import datetime
+from models.base import Base
 from models.trade import Trade, TradeType
-from models.trade import Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
